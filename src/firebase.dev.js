@@ -1,0 +1,14 @@
+import firebase from 'firebase'
+
+//here is the firebase config
+
+var config = {
+
+};
+
+firebase.initializeApp(config);
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+export const auth = firebase.auth();
+
+export default firebase;
