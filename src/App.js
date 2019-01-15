@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import { auth, provider } from './firebase.js';
+import { auth, googleProvider, facebookProvider } from './firebase.js';
 import Party from './Party.js';
 class App extends Component {
 
-  state = {user: null};
+  state = {user: null, loginProvider: null};
 
   logout = _ => {
     auth.signOut()
@@ -15,13 +15,16 @@ class App extends Component {
     });
   }
 
-  login = _ => {
-    auth.signInWithPopup(provider) 
-      .then((result) => {
-        this.setState({
-          user: result.user
+  login = e => {
+    let loginProvider = (e.target.id === 'googleLogin' ? googleProvider : (e.target.id === 'facebookLogin' ? facebookProvider : ''));
+    if (loginProvider) {
+      auth.signInWithPopup(loginProvider) 
+        .then((result) => {
+          this.setState({
+            user: result.user
+          });
         });
-      });
+    }
   }
 
   componentDidMount() {
@@ -41,7 +44,10 @@ class App extends Component {
               {this.state.user ?
                 <button onClick={this.logout}>Log Out</button>                
                 :
-                <button onClick={this.login}>Log In</button>              
+                <span>
+                  <button id="googleLogin" onClick={this.login}>Google Log In</button>              
+                  <button id="facebookLogin" onClick={this.login}>Facebook Log In</button>              
+                </span>
               }
             </div>
         </header>
