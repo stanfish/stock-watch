@@ -32,7 +32,7 @@ class App extends Component {
     itemsRef.push(item);
     this.setState({
       currentItem: '',
-      username: ''
+      username: this.state.user.displayName
     });
   }
   logout() {
@@ -48,7 +48,8 @@ class App extends Component {
       .then((result) => {
         const user = result.user;
         this.setState({
-          user
+          user,
+          username: user.displayName
         });
       });
   }
@@ -56,7 +57,7 @@ class App extends Component {
 
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user });
+        this.setState({ user, username: user.displayName });
       } 
     });
 
@@ -102,7 +103,7 @@ class App extends Component {
             <div className='user-profile'>
               {this.state.user.displayName}
               <br />
-              <img src={this.state.user.photoURL} />
+              {/* <img src={this.state.user.photoURL} /> */}
             </div>
 
             <div className='container'>
@@ -121,7 +122,7 @@ class App extends Component {
                           <li key={item.id}>
                             <h3>{item.title}</h3>
                             <p>brought by: {item.user}
-                              {item.user === this.state.user.displayName || item.user === this.state.user.email ?
+                              {true || item.user === this.state.user.displayName || item.user === this.state.user.email ?
                                 <button onClick={() => this.removeItem(item.id)}>Remove Item</button> : null}
                             </p>
                           </li>
