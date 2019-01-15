@@ -1,41 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import firebase, { auth, provider } from './firebase.js';
-
+import { auth, provider } from './firebase.js';
+import Party from './Party.js';
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      currentItem: '',
-      username: '',
-      items: [],
-      user: null
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this); 
-  }
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-    const itemsRef = firebase.database().ref('items');
-    const item = {
-      title: this.state.currentItem,
-      user: this.state.username
-    }
-    itemsRef.push(item);
-    this.setState({
-      currentItem: '',
-      username: this.state.user.displayName
-    });
-  }
-  logout() {
+
+  state = {user: null};
+
+  logout = _ => {
     auth.signOut()
     .then(() => {
       this.setState({
@@ -43,97 +14,42 @@ class App extends Component {
       });
     });
   }
-  login() {
+
+  login = _ => {
     auth.signInWithPopup(provider) 
       .then((result) => {
-        const user = result.user;
         this.setState({
-          user,
-          username: user.displayName
+          user: result.user
         });
       });
   }
-  componentDidMount() {
 
+  componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user, username: user.displayName });
+        this.setState({ user });
       } 
     });
-
-
-    const itemsRef = firebase.database().ref('items');
-
-    itemsRef.on('value', (snapshot) => {
-      let items = snapshot.val();
-      let newState = [];
-      for (let item in items) {
-        newState.push({
-          id: item,
-          title: items[item].title,
-          user: items[item].user
-        });
-      }
-      this.setState({
-        items: newState
-      });
-    });
   }
-  removeItem(itemId) {
-    const itemRef = firebase.database().ref(`/items/${itemId}`);
-    itemRef.remove();
-  }
+  
   render() {
     return (
       <div className='app'>
         <header>
             <div className="wrapper">
-              <h1>Fun Food Friends</h1>
+              <h1>Fun Food Friends</h1> 
               {this.state.user ?
                 <button onClick={this.logout}>Log Out</button>                
                 :
                 <button onClick={this.login}>Log In</button>              
               }
-              <i className="fa fa-shopping-basket" aria-hidden="true"></i>               
             </div>
         </header>
 
-        {this.state.user ?
+        {this.state.user ? 
           <div>
-            <div className='user-profile'>
-              {this.state.user.displayName}
-              <br />
-              {/* <img src={this.state.user.photoURL} /> */}
-            </div>
-
-            <div className='container'>
-              <section className='add-item'>
-                    <form onSubmit={this.handleSubmit}>
-                      <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
-                      <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
-                      <button>Add Item</button>
-                    </form>
-              </section>
-              <section className='display-item'>
-                  <div className="wrapper">
-                    <ul>
-                      {this.state.items.map((item) => {
-                        return (
-                          <li key={item.id}>
-                            <h3>{item.title}</h3>
-                            <p>brought by: {item.user}
-                              {true || item.user === this.state.user.displayName || item.user === this.state.user.email ?
-                                <button onClick={() => this.removeItem(item.id)}>Remove Item</button> : null}
-                            </p>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-              </section>
-            </div>
-
-
+            {this.state.user.displayName}
+            <Party user={this.state.user} />
           </div>
           :
           <div className='wrapper'>
