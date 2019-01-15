@@ -1,5 +1,7 @@
 This project is based on https://css-tricks.com/intro-firebase-react/
 
+Rename firebase.dev.js to firebase.js and add config
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
