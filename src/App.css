@@ -9,14 +9,14 @@ header {
   padding: 33px 0 25px 15px;
 }
 
-header h1 {
+.header-title {
   font-size: 25px;
   font-weight: 600;
   letter-spacing: 0.3px;
   display: inline-block;
   margin: 0;
   vertical-align: middle;
-  
+  margin-right: 400px;
 }
 
 .fa {
@@ -32,4 +32,13 @@ header i {
 .wrapper {
   max-width: 1100px;
   margin: 0 auto;
+  display: table;
+}
+
+.login-section {
+  display: table-cell;
+}
+
+.email-login {
+  width: 200px;
 }
