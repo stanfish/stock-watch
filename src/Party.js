@@ -6,7 +6,7 @@ class Party extends Component {
 
   state = {
     inputItem: '',
-    inputUser: this.props.user && this.props.user.displayName,
+    inputUser: this.props.user && (this.props.user.displayName || this.props.user.email),
     items: [],
     user: this.props.user
   }
@@ -28,7 +28,7 @@ class Party extends Component {
     itemsRef.push(item);
     this.setState({
       inputItem: '',
-      inputUser: this.state.user.displayName
+      inputUser: this.state.user.displayName || this.props.user.email
     });
   }
 

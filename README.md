@@ -14,11 +14,14 @@ Rename firebase.dev.js to firebase.js and add config
 - [x] Facebook Authorization
 - [ ] Redux
 - [ ] Router
+- [ ] Loader
 - [ ] Create new party
 - [ ] Remove party
-- [ ] Added by user
+- [x] Added by user
 - [ ] Refactor
+- [ ] Styling
 - [ ] Edit item
 - [ ] Filter
 - [ ] GraphQL
 - [ ] Unit test
+- [ ] Other ideas (https://iextrading.com/developer/docs/#chart)
