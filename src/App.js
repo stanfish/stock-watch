@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { auth, googleProvider, facebookProvider } from './firebase.js';
 import Party from './Party.js';
+import { Input, Button, Icon } from 'semantic-ui-react';
 class App extends Component {
 
   state = {
@@ -77,22 +78,22 @@ class App extends Component {
           <div className="app-wrapper">
             <span className="app-header-title">Fun Food Friends</span> 
             {this.state.user ?
-              <button className="app-login-section" onClick={this.logout}>Log Out</button>                
+              <Button className="app-login-section" onClick={this.logout}>Log Out</Button>                
               :
               <span className="app-login-section" style={{width:"250px"}}>
                 <form className="app-email-login" onSubmit={this.handleSubmit}>
-                  <input type="text" name="email" placeholder="What's your email?" onChange={this.handleChange} value={this.state.email} />
-                  <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
-                  <button style={{display:"none"}}></button>
+                  <Input type="text" name="email" placeholder="What's your email?" onChange={this.handleChange} value={this.state.email} />
+                  <Input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                  <Button style={{display:"none"}}></Button>
                 </form>
                 <span style={{display:"table"}}>
-                  <span style={{display:"table-cell"}}><button onClick={this.handleSubmit}>Login</button></span>&nbsp; 
-                  <span style={{display:"table-cell"}}><button onClick={this.signUp}>Sign up</button></span>
+                  <span style={{display:"table-cell"}}><Button primary onClick={this.handleSubmit}>Log in</Button></span>&nbsp; 
+                  <span style={{display:"table-cell"}}><Button secondary onClick={this.signUp}>Sign up</Button></span>
                 </span>
                 {this.state.errorMessage}
                   <br />
-                <button id="googleLogin" onClick={this.login}>Google Log In</button>&nbsp;         
-                <button id="facebookLogin" onClick={this.login}>Facebook Log In</button>              
+                <Button color="google plus" id="googleLogin" onClick={this.login}><Icon name='google' />Log in with Google</Button>&nbsp;         
+                <Button color="facebook" id="facebookLogin" onClick={this.login}><Icon name='facebook' />Log in with Facebook</Button>              
               </span>
             }
           </div>
