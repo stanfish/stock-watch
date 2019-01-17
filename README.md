@@ -13,8 +13,8 @@ Rename firebase.dev.js to firebase.js and add config
 - [x] Email Authorization
 - [x] Facebook Authorization
 - [ ] Modulize login process
-- [ ] Styling structure
-- [ ] Semantic UI
+- [x] Styling structure
+- [x] Semantic UI
 - [ ] Redux
 - [ ] Router
 - [ ] Loader

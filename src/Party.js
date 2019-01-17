@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './Party.css';
+import { Input, Button } from 'semantic-ui-react';
 
 class Party extends Component {
 
@@ -66,9 +67,9 @@ class Party extends Component {
         <div className='party-container'>
           <section className='party-add-item'>
                 <form onSubmit={this.handleSubmit}>
-                  <input type="text" name="inputUser" placeholder="What's your name?" onChange={this.handleChange} value={this.state.inputUser} />
-                  <input type="text" name="inputItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.inputItem} />
-                  <button>Add Item</button>
+                  <Input type="text" name="inputUser" placeholder="What's your name?" onChange={this.handleChange} value={this.state.inputUser} />
+                  <Input type="text" name="inputItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.inputItem} />
+                  <Button primary>Add Item</Button>
                 </form>
           </section>
           <section className='party-display-item'>
@@ -80,7 +81,7 @@ class Party extends Component {
                         <h3>{item.name}</h3>
                         <p>brought by: {item.user}
                           {item.created_by === this.state.user.uid?
-                            <button onClick={() => this.removeItem(item.id)}>Remove</button> : null}
+                            <Button onClick={() => this.removeItem(item.id)}>Remove</Button> : null}
                         </p>
                       </li>
                     )
