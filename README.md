@@ -5,20 +5,21 @@ This project is based on tutorial https://css-tricks.com/intro-firebase-react/ t
 
 ## Install
 
-Rename firebase.dev.js to firebase.js and add config
+Rename src/firebase.dev.js to src/firebase.js and add config
 
 
 ## Plan to implement
 - [x] Google Authorization
 - [x] Email Authorization
 - [x] Facebook Authorization
-- [ ] Modulize login process
+- [x] Modulize login process
 - [x] Styling structure
 - [x] Semantic UI
 - [ ] Redux
 - [ ] Router
 - [ ] Loader
 - [x] Added by user
+- [ ] SASS
 - [ ] Refactor
 - [ ] Edit item
 - [ ] Create new party

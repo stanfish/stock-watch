@@ -19,11 +19,3 @@
   margin: 0 auto;
   display: table;
 }
-
-.app-login-section {
-  display: table-cell;
-}
-
-.app-email-login {
-  width: 200px;
-}
