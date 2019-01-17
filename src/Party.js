@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './Party.css';
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Button, Divider } from 'semantic-ui-react';
 
 class Party extends Component {
 
@@ -79,9 +79,15 @@ class Party extends Component {
                     return (
                       <li key={item.id}>
                         <h3>{item.name}</h3>
-                        <p>brought by: {item.user}
+                        <p>brought by: {item.user} 
                           {item.created_by === this.state.user.uid?
-                            <Button onClick={() => this.removeItem(item.id)}>Remove</Button> : null}
+                            <span>
+                              <Divider section />
+                              <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 
+                            </span>  
+                            : null
+                          }
+                            
                         </p>
                       </li>
                     )
