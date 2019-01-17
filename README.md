@@ -10,17 +10,19 @@ Rename firebase.dev.js to firebase.js and add config
 
 ## Plan to implement
 - [x] Google Authorization
-- [ ] Email Authorization
+- [x] Email Authorization
 - [x] Facebook Authorization
+- [ ] Modulize login process
+- [ ] Styling structure
+- [ ] Semantic UI
 - [ ] Redux
 - [ ] Router
 - [ ] Loader
-- [ ] Create new party
-- [ ] Remove party
 - [x] Added by user
 - [ ] Refactor
-- [ ] Styling
 - [ ] Edit item
+- [ ] Create new party
+- [ ] Remove party
 - [ ] Filter
 - [ ] GraphQL
 - [ ] Unit test

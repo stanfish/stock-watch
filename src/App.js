@@ -72,31 +72,31 @@ class App extends Component {
   
   render() {
     return (
-      <div className='app'>
-        <header>
-            <div className="wrapper">
-              <span className="header-title">Fun Food Friends</span> 
-              {this.state.user ?
-                <button className="login-section" onClick={this.logout}>Log Out</button>                
-                :
-                <span className="login-section" style={{width:"250px"}}>
-                  <form className="email-login" onSubmit={this.handleSubmit}>
-                    <input type="text" name="email" placeholder="What's your email?" onChange={this.handleChange} value={this.state.email} />
-                    <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
-                    <button style={{display:"none"}}></button>
-                  </form>
-                  <span style={{display:"table"}}>
-                    <span style={{display:"table-cell"}}><button onClick={this.handleSubmit}>Login</button></span>&nbsp; 
-                    <span style={{display:"table-cell"}}><button onClick={this.signUp}>Sign up</button></span>
-                  </span>
-                  {this.state.errorMessage}
-                   <br />
-                  <button id="googleLogin" onClick={this.login}>Google Log In</button>&nbsp;         
-                  <button id="facebookLogin" onClick={this.login}>Facebook Log In</button>              
+      <div>
+        <div className="app-header">
+          <div className="app-wrapper">
+            <span className="app-header-title">Fun Food Friends</span> 
+            {this.state.user ?
+              <button className="app-login-section" onClick={this.logout}>Log Out</button>                
+              :
+              <span className="app-login-section" style={{width:"250px"}}>
+                <form className="app-email-login" onSubmit={this.handleSubmit}>
+                  <input type="text" name="email" placeholder="What's your email?" onChange={this.handleChange} value={this.state.email} />
+                  <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
+                  <button style={{display:"none"}}></button>
+                </form>
+                <span style={{display:"table"}}>
+                  <span style={{display:"table-cell"}}><button onClick={this.handleSubmit}>Login</button></span>&nbsp; 
+                  <span style={{display:"table-cell"}}><button onClick={this.signUp}>Sign up</button></span>
                 </span>
-              }
-            </div>
-        </header>
+                {this.state.errorMessage}
+                  <br />
+                <button id="googleLogin" onClick={this.login}>Google Log In</button>&nbsp;         
+                <button id="facebookLogin" onClick={this.login}>Facebook Log In</button>              
+              </span>
+            }
+          </div>
+        </div>
 
         {this.state.user ? 
           <div>
@@ -104,7 +104,7 @@ class App extends Component {
             <Party user={this.state.user} />
           </div>
           :
-          <div className='wrapper'>
+          <div className='app-wrapper'>
             <p>You must be logged in to see the potluck list and submit to it.</p>
           </div>
         } 

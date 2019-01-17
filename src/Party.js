@@ -19,6 +19,10 @@ class Party extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.state.inputItem || !this.state.inputUser) {
+      return;
+    }
+
     const itemsRef = firebase.database().ref('items');
     const item = {
       name: this.state.inputItem,
@@ -59,16 +63,16 @@ class Party extends Component {
   
   render() {
     return (
-        <div className='container'>
-          <section className='add-item'>
+        <div className='party-container'>
+          <section className='party-add-item'>
                 <form onSubmit={this.handleSubmit}>
                   <input type="text" name="inputUser" placeholder="What's your name?" onChange={this.handleChange} value={this.state.inputUser} />
                   <input type="text" name="inputItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.inputItem} />
                   <button>Add Item</button>
                 </form>
           </section>
-          <section className='display-item'>
-              <div className="wrapper">
+          <section className='party-display-item'>
+              <div className="party-wrapper">
                 <ul>
                   {this.state.items && this.state.items.map((item) => {
                     return (
