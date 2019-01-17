@@ -1,15 +1,10 @@
-body {
-  font-family: 'Open Sans', sans-serif;
-  background-color: #fff;
-}
-
-header {
+.app-header {
   color: #fff;
   background-color: #103D5D;
   padding: 33px 0 25px 15px;
 }
 
-.header-title {
+.app-header-title {
   font-size: 25px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -19,26 +14,16 @@ header {
   margin-right: 400px;
 }
 
-.fa {
-  font-size: 22px;
-  transform: translateY(50deg);  
-}
-
-header i {
-  vertical-align: middle;
-  margin-left: 12px;
-}
-
-.wrapper {
+.app-wrapper {
   max-width: 1100px;
   margin: 0 auto;
   display: table;
 }
 
-.login-section {
+.app-login-section {
   display: table-cell;
 }
 
-.email-login {
+.app-email-login {
   width: 200px;
 }
