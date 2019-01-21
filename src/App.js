@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Party from './Party.js';
 import Login from './login/Login.js';
+import { connect } from 'react-redux';
+
 class App extends Component {
-
-  state = {
-    user: null
-  };
-
-  handleUserChange = (user) => {
-    this.setState({user});
-  }
   
   render() {
     return (
@@ -18,18 +12,18 @@ class App extends Component {
         <div className="app-header">
           <div className="app-wrapper">
             <span className="app-header-title">Fun Food Friends</span> 
-            <Login onUserChange={this.handleUserChange}/>
+            <Login />
           </div>
         </div>
 
-        {this.state.user ? 
+        {this.props.user ? 
           <div>
-            {this.state.user.displayName}
-            <Party user={this.state.user} />
+            {this.props.user.displayName}
+            <Party />
           </div>
           :
           <div className='app-wrapper'>
-            <p>You must be logged in to see the potluck list and submit to it.</p>
+            <p>You must be logged in to see the stock list.</p>
           </div>
         } 
          
@@ -38,4 +32,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return { 
+    user: state.user,
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(App);

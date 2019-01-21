@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from './firebase.js';
 import './Party.css';
 import { Input, Button, Divider } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 class Party extends Component {
 
@@ -9,7 +10,6 @@ class Party extends Component {
     inputItem: '',
     inputUser: this.props.user && (this.props.user.displayName || this.props.user.email),
     items: [],
-    user: this.props.user
   }
 
   handleChange = e => {
@@ -28,12 +28,12 @@ class Party extends Component {
     const item = {
       name: this.state.inputItem,
       user: this.state.inputUser,
-      created_by: this.state.user.uid
+      created_by: this.props.user.uid
     }
     itemsRef.push(item);
     this.setState({
       inputItem: '',
-      inputUser: this.state.user.displayName || this.props.user.email
+      inputUser: this.props.user.displayName || this.props.user.email
     });
   }
 
@@ -79,16 +79,14 @@ class Party extends Component {
                     return (
                       <li key={item.id}>
                         <h3>{item.name}</h3>
-                        <p>brought by: {item.user} 
-                          {item.created_by === this.state.user.uid?
+                        <p>brought by: {item.user} </p>
+                          {item.created_by === this.props.user.uid?
                             <span>
                               <Divider section />
                               <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 
                             </span>  
                             : null
                           }
-                            
-                        </p>
                       </li>
                     )
                   })}
@@ -101,4 +99,12 @@ class Party extends Component {
 
 }
 
-export default Party;
+const mapStateToProps = state => {
+  return { 
+    user: state.user,
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(Party);
