@@ -1,6 +1,6 @@
 ## Intro
 
-This project is based on tutorial https://css-tricks.com/intro-firebase-react/ that start from repo https://github.com/swbloom/fun-food-friends
+stock-change-over-time
 
 
 ## Install
@@ -15,16 +15,11 @@ Rename src/firebase.dev.js to src/firebase.js and add config
 - [x] Modulize login process
 - [x] Styling structure
 - [x] Semantic UI
-- [ ] Redux
+- [-] Redux
+- [ ] Stock API (https://iextrading.com/developer/docs/#chart)
 - [ ] Router
 - [ ] Loader
-- [x] Added by user
 - [ ] SASS
 - [ ] Refactor
-- [ ] Edit item
-- [ ] Create new party
-- [ ] Remove party
-- [ ] Filter
 - [ ] GraphQL
 - [ ] Unit test
-- [ ] Other ideas (https://iextrading.com/developer/docs/#chart)

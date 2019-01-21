@@ -1,20 +1,28 @@
 {
-  "name": "potluck-fun",
+  "name": "stock-change-over-time",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
     "semantic-ui-react": "^0.84.0"
   },
   "devDependencies": {
     "firebase": "^3.9.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

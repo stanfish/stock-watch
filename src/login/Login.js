@@ -2,26 +2,21 @@ import React, { Component } from 'react';
 import './Login.css';
 import { auth, googleProvider, facebookProvider } from '../firebase.js';
 import { Input, Button, Icon } from 'semantic-ui-react';
-
+import { connect } from 'react-redux';
+import { setUser } from '../actions';
 class Login extends Component {
   
   state = {
-    user: null, 
     loginProvider: null,
     email: '', 
     password: '',
     errorMessage: ''
   };
   
-  setUser(user) {
-    this.setState({user});
-    this.props.onUserChange(user);
-  }
-
   logout = _ => {
     auth.signOut()
     .then(() => {
-      this.setUser(null);
+      this.props.setUser(null);
     });
   }
 
@@ -30,7 +25,7 @@ class Login extends Component {
     if (loginProvider) {
       auth.signInWithPopup(loginProvider) 
         .then((result) => {
-          this.setUser(result.user);
+          this.props.setUser(result.user);
         });
     }
   }
@@ -50,7 +45,6 @@ class Login extends Component {
       this.setState({errorMessage});
       console.log(errorCode, " Login error ", errorMessage);
     });
-
   }
 
   signUp = _ => {
@@ -66,14 +60,14 @@ class Login extends Component {
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.setUser(user);
+        this.props.setUser(user);
       } 
     });
   }
 
   render() {
     return (
-      this.state.user ?
+      this.props.user ?
       <Button className="login-login-section" onClick={this.logout}>Log Out</Button>                
       :
       <span className="login-login-section" style={{width:"250px"}}>
@@ -95,4 +89,13 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return { 
+    user: state.user,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { setUser }
+)(Login);
