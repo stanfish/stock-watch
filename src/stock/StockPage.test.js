@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Party from './Party';
+import StockPage from './StockPage';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Party />, div);
+  ReactDOM.render(<StockPage />, div);
 });
