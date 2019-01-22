@@ -7,7 +7,15 @@ const userReducer = (user=null, action) => {
   return user;
 }
 
+const stockReducer = (stocks=null, action) => {
+  if (action.type === 'SET_STOCKS') {
+    return action.payload.stocks;
+  }
+  return stocks;
+}
+
 
 export default combineReducers({
-  user: userReducer
+  user: userReducer,
+  stocks: stockReducer
 });

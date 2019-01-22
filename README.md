@@ -15,7 +15,7 @@ Rename src/firebase.dev.js to src/firebase.js and add config
 - [x] Modulize login process
 - [x] Styling structure
 - [x] Semantic UI
-- [-] Redux
+- [ ] Redux
 - [ ] Stock API (https://iextrading.com/developer/docs/#chart)
 - [ ] Router
 - [ ] Loader

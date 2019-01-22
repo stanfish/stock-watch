@@ -1,38 +1,12 @@
 import React, { Component } from 'react';
-import { Input, Button, Divider } from 'semantic-ui-react';
+import { Button, Divider, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import firebase from '../firebase.js';
 import './StockPage.css';
+import { setStocks } from '../actions';
+import AddStock from './AddStock';
 
 class StockPage extends Component {
-
-  state = {
-    inputStock: '',
-    items: [],
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    if (!this.state.inputStock) {
-      return;
-    }
-
-    const itemsRef = firebase.database().ref('items');
-    const item = {
-      stock: this.state.inputStock,
-      user: this.props.user.uid
-    }
-    itemsRef.push(item);
-    this.setState({
-      inputStock: ''
-    });
-  }
 
   removeItem = itemId => {
     const itemRef = firebase.database().ref(`/items/${itemId}`);
@@ -52,35 +26,26 @@ class StockPage extends Component {
           user: items[item].user
         });
       }
-      this.setState({
-        items: newItem
-      });
+      this.props.setStocks(newItem);
     });
   }
   
   render() {
     return (
         <div className='stock-container'>
-          <section className='stock-add-item'>
-                <form onSubmit={this.handleSubmit}>
-                  <Input type="text" name="inputStock" placeholder="Stock Symbol" onChange={this.handleChange} value={this.state.inputStock} />
-                  <Button primary>Add Stock</Button>
-                </form>
-          </section>
+          <AddStock />
           <section className='stock-display-item'>
               <div className="stock-wrapper">
                 <ul>
-                  {this.state.items && this.state.items.map((item) => {
+                  {this.props.stocks && this.props.stocks.map((item) => {
                     return (
                       <li key={item.id}>
                         <h3>{item.stock}</h3>
-                          {item.user === this.props.user.uid?
                             <span>
+                              <Loader inline active={false} />
                               <Divider section />
                               <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 
                             </span>  
-                            : null
-                          }
                       </li>
                     )
                   })}
@@ -96,9 +61,15 @@ class StockPage extends Component {
 const mapStateToProps = state => {
   return { 
     user: state.user,
+    stocks: state.stocks,
   };
 };
 
+const mapDispatchToProps = {
+  setStocks
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(StockPage);
