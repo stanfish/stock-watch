@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import './Login.css';
 import { auth, googleProvider, facebookProvider } from '../firebase.js';
 import { Input, Button, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { setUser } from '../actions';
+
 class Login extends Component {
-  
   state = {
+    user: null, 
     loginProvider: null,
     email: '', 
     password: '',
     errorMessage: ''
   };
   
+  setUser(user) {
+    this.setState({user});
+    this.props.onUserChange(user);
+  }
+
   logout = _ => {
     auth.signOut()
     .then(() => {
-      this.props.setUser(null);
+      this.setUser(null);
     });
   }
 
@@ -25,7 +29,7 @@ class Login extends Component {
     if (loginProvider) {
       auth.signInWithPopup(loginProvider) 
         .then((result) => {
-          this.props.setUser(result.user);
+          this.setUser(result.user);
         });
     }
   }
@@ -60,14 +64,14 @@ class Login extends Component {
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        this.props.setUser(user);
+        this.setUser(user);
       } 
     });
   }
 
   render() {
     return (
-      this.props.user ?
+      this.state.user ?
       <Button className="login-login-section" onClick={this.logout}>Log Out</Button>                
       :
       <span className="login-login-section" style={{width:"250px"}}>
@@ -89,13 +93,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { 
-    user: state.user,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { setUser }
-)(Login);
+export default Login;
