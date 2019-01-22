@@ -1,9 +1,7 @@
 import firebase from 'firebase'
 
-//here is the firebase config
-
 var config = {
-
+//here is the firebase config
 };
 
 firebase.initializeApp(config);
