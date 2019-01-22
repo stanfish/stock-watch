@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Party from './Party.js';
+import StockPage from './stock/StockPage.js';
 import Login from './login/Login.js';
 import { connect } from 'react-redux';
 import { setUser } from './actions';
@@ -23,7 +23,7 @@ class App extends Component {
         {this.props.user ? 
           <div>
             {this.props.user.displayName}
-            <Party />
+            <StockPage />
           </div>
           :
           <div className='app-wrapper'>
@@ -42,7 +42,11 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = {
+  setUser
+};
+
 export default connect(
   mapStateToProps,
-  { setUser }
+  mapDispatchToProps
 )(App);

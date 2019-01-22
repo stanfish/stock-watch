@@ -1,16 +1,16 @@
-.party-wrapper {
+.stock-wrapper {
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.party-container {
+.stock-container {
   display: flex;
   max-width: 1100px;
   margin: 0 auto;
   padding-top: 30px;
 }
 
-.party-add-item {
+.stock-add-item {
   border-radius: 2px;
   border-top: 3px solid #103D5D;
   margin-right: 50px;
@@ -22,18 +22,18 @@
   margin-right: auto;
 }
 
-.party-display-item {
+.stock-display-item {
   width: 65%;
   margin-left: 50px;
 }
 
-.party-display-item button {
+.stock-display-item button {
   margin-top: 20px;
   margin-left: auto;
   display: block;
 }
 
-.party-add-item form {
+.stock-add-item form {
   width: 100%;
   overflow: hidden;
 }
