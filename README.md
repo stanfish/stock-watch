@@ -1,6 +1,6 @@
 ## Intro
 
-stock-change-over-time
+stock-change-over-time (In development)
 
 
 ## Install

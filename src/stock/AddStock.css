@@ -9,3 +9,9 @@
   width: 25%;
   margin-right: auto;
 }
+
+
+.stock-add-item form {
+  width: 100%;
+  overflow: hidden;
+}
