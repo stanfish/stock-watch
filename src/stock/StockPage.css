@@ -1,27 +1,7 @@
-.stock-wrapper {
-  max-width: 1100px;
-  margin: 0 auto;
-}
 
 .stock-container {
   display: flex;
   max-width: 1100px;
   margin: 0 auto;
   padding-top: 30px;
-}
-
-.stock-display-item {
-  width: 65%;
-  margin-left: 50px;
-}
-
-.stock-display-item button {
-  margin-top: 20px;
-  margin-left: auto;
-  display: block;
-}
-
-.stock-add-item form {
-  width: 100%;
-  overflow: hidden;
 }

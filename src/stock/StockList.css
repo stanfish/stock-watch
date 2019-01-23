@@ -1,0 +1,15 @@
+.stock-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stock-display-item {
+  width: 65%;
+  margin-left: 50px;
+}
+
+.stock-display-item button {
+  margin-top: 20px;
+  margin-left: auto;
+  display: block;
+}
