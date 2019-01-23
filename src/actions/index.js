@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const setUser = (user) => {
   return {
     type: 'SET_USER',
@@ -14,4 +16,17 @@ export const setStocks = (stocks) => {
       stocks
     }
   };
+};
+
+export const fetchCurrentPrice = sym => async dispatch => {
+  let responsePrice = 'N/A';
+  try {
+    const response = await axios.create({
+      baseURL: 'https://api.iextrading.com/1.0/stock'
+    }).get(sym+'/price');
+    responsePrice = response.data;
+  } catch(err) {
+    //error in fetching
+  }
+  dispatch({ type: 'FETCH_CURRENT_PRICE', payload: {stock: sym, price: responsePrice} });
 };

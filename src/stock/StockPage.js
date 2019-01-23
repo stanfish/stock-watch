@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from '../firebase.js';
 import './StockPage.css';
-import { setStocks } from '../actions';
+import { setStocks, fetchCurrentPrice } from '../actions';
 import AddStock from './AddStock';
 import StockList from './StockList';
 
@@ -20,8 +20,10 @@ class StockPage extends Component {
           stock: items[item].stock,
           user: items[item].user
         });
+        this.props.fetchCurrentPrice(items[item].stock);
       }
       this.props.setStocks(newItem);
+      
     });
   }
   
@@ -42,7 +44,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  setStocks
+  setStocks,
+  fetchCurrentPrice
 };
 
 export default connect(
