@@ -14,6 +14,19 @@ const stockReducer = (stocks=[], action) => {
   return stocks;
 }
 
+
+const dateRangeReducer = (state=null, action) => {
+  if (action.type === 'SET_DATE_RANGE') {
+    return {
+      fromDate: action.payload.fromDate,
+      toDate: action.payload.toDate,
+    };
+  }
+  return state;
+}
+
+
+
 const stockMapReducer = (stocks={}, action) => {
   if (action.type === 'FETCH_CURRENT_PRICE') {
     if (!stocks[action.payload.stock] || !stocks[action.payload.stock].currentPrice) {
@@ -31,4 +44,5 @@ export default combineReducers({
   user: userReducer,
   stocks: stockReducer,
   stockMap: stockMapReducer,
+  dateRange: dateRangeReducer,
 });

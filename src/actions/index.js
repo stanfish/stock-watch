@@ -18,6 +18,16 @@ export const setStocks = (stocks) => {
   };
 };
 
+export const setDateRange = (fromDate, toDate) => {
+  return {
+    type: 'SET_DATE_RANGE',
+    payload: {
+      fromDate,
+      toDate,
+    }
+  };
+};
+
 export const fetchCurrentPrice = sym => async dispatch => {
   let responsePrice = 'N/A';
   try {

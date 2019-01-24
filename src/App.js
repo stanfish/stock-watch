@@ -22,7 +22,6 @@ class App extends Component {
 
         {this.props.user ? 
           <div>
-            {this.props.user.displayName}
             <StockPage />
           </div>
           :
