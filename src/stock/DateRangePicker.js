@@ -23,15 +23,22 @@ export default class DateRangePicker extends React.Component {
     this.props.onApply(this.state.from, this.state.to);
     this.setState({open: false});
   }
-  handleDayClick(day) {
-    const range = DateUtils.addDayToRange(day, this.state);
-    this.setState(range);
+  handleDayClick(day, {disabled}) {
+    if (!disabled) {
+      const range = DateUtils.addDayToRange(day, this.state);
+      this.setState(range);
+    }
   }
   handleResetClick() {
     this.setState(this.getInitialState());
   }
   openArea = _ => {
     this.setState({open: true});
+  }
+
+  isDisabledDate = (day) => {
+    const today = new Date();
+    return day.getDay() === 0 || day.getDay() === 6 || day > today;
   }
 
   render() {
@@ -71,6 +78,8 @@ export default class DateRangePicker extends React.Component {
           selectedDays={[from, { from, to }]}
           modifiers={modifiers}
           onDayClick={this.handleDayClick}
+          disabledDays={ this.isDisabledDate }
+          toMonth = {new Date()}
         />
 
         {
