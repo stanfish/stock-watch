@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from '../firebase.js';
+import moment from 'moment';
 import './StockPage.css';
-import { setStocks, fetchCurrentPrice } from '../actions';
+import { setStocks, fetchCurrentPrice, setDateRange } from '../actions';
 import AddStock from './AddStock';
 import StockList from './StockList';
-
+import DateRangePicker from './DateRangePicker';
+//import {saveLocalStorage, getLocalStorage} from '../util';
 class StockPage extends Component {
 
   componentDidMount() {
@@ -26,12 +28,20 @@ class StockPage extends Component {
       
     });
   }
+
+  applyDateRange = (from, to ) => {
+    console.log('Apply date', moment(from).format('YYYYMMDD'), moment(to).format('YYYYMMDD'));
+    this.props.setDateRange(from, to);
+  }
   
   render() {
     return (
         <div className='stock-container'>
           <AddStock />
-          <StockList />
+          <div style={{width: '100%'}}>
+            <DateRangePicker onApply={this.applyDateRange} />
+            <StockList />
+          </div>
         </div>
     );
   }
@@ -45,7 +55,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setStocks,
-  fetchCurrentPrice
+  fetchCurrentPrice,
+  setDateRange,
 };
 
 export default connect(

@@ -1,8 +1,8 @@
 import React from 'react';
 import DayPicker, { DateUtils } from 'react-day-picker';
+import { Button } from 'semantic-ui-react';
 import 'react-day-picker/lib/style.css';
 import './DateRangePicker.css';
-
 export default class DateRangePicker extends React.Component {
   static defaultProps = {
     numberOfMonths: 2,
@@ -17,7 +17,6 @@ export default class DateRangePicker extends React.Component {
     return {
       from: undefined,
       to: undefined,
-      open: false,
     };
   }
   handleApplyClick = _ => {
@@ -44,10 +43,13 @@ export default class DateRangePicker extends React.Component {
         {from &&
           to &&
           `Selected from ${from.toLocaleDateString()} to
-              ${to.toLocaleDateString()}`}{' '}        
-        <button className="link" onClick={this.openArea}>
+              ${to.toLocaleDateString()}`
+        }
+        { (!from || !to) && "No date range is selected."}
+        {' '}        
+        <Button secondary onClick={this.openArea}>
           Open
-        </button>    
+        </Button>    
       </p>
     );
 
@@ -59,7 +61,9 @@ export default class DateRangePicker extends React.Component {
           {from &&
             to &&
             `Selected from ${from.toLocaleDateString()} to
-                ${to.toLocaleDateString()}`}{' '}
+                ${to.toLocaleDateString()}`
+          }
+          {' '}
         </p>
         <DayPicker
           className="Selectable"
@@ -73,12 +77,12 @@ export default class DateRangePicker extends React.Component {
           from &&
             to && (
               <>
-              <button className="link" onClick={this.handleResetClick}>
-                Reset
-              </button>
-              <button className="link" onClick={this.handleApplyClick}>
-                Apply
-              </button>              
+                <Button secondary onClick={this.handleResetClick}>
+                  Reset
+                </Button>
+                <Button secondary  onClick={this.handleApplyClick}>
+                  Apply
+                </Button>              
               </>
             )
         }    
