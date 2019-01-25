@@ -13,3 +13,15 @@
   margin-left: auto;
   display: block;
 }
+
+.stock-display-percent-up {
+  color: green;
+}
+
+.stock-display-percent-down {
+  color: red;
+}
+
+.stock-display-percent {
+  color:black;
+}

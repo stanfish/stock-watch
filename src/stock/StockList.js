@@ -28,6 +28,16 @@ class StockList extends Component {
         <div className="stock-wrapper">
           <ul>
             {this.props.stocks && this.props.stocks.map((item) => {
+
+            let percentClass = 'stock-display-percent';
+            if (this.props.stockMap[item.stock] && this.props.stockMap[item.stock].percent !== undefined) {
+              if (this.props.stockMap[item.stock].percent >= 0) {
+                percentClass = 'stock-display-percent-up';
+              } else {
+                percentClass = 'stock-display-percent-down';
+              }
+            }
+
               return (
                 <li key={item.id}>
                   <h3>{item.stock}</h3>
@@ -61,17 +71,16 @@ class StockList extends Component {
 
                     { fromDate && toDate &&
                       <div>
-                        Percent change:  
-                        <span>
-                          <Loader inline active={!this.props.stockMap[item.stock] || !this.props.stockMap[item.stock].percent} />
+                        Percent change:   
+                        <span className={percentClass}>
+                          <Loader inline active={!this.props.stockMap[item.stock] || this.props.stockMap[item.stock].percent === undefined} />
                           {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].percent} %
                         </span>
                       </div>  
                     } 
 
-
-                      <Divider section />
-                      <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 
+                    <Divider section />
+                    <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 
                 </li>
               )
             })}
