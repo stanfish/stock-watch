@@ -54,10 +54,21 @@ class StockList extends Component {
                         Price at ({toDate}): $ 
                         <span>
                           <Loader inline active={!this.props.stockMap[item.stock] || !this.props.stockMap[item.stock].toPrice} />
-                          {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].toDate}
+                          {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].toPrice}
                         </span>
                       </div>  
                     } 
+
+                    { fromDate && toDate &&
+                      <div>
+                        Percent change:  
+                        <span>
+                          <Loader inline active={!this.props.stockMap[item.stock] || !this.props.stockMap[item.stock].percent} />
+                          {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].percent} %
+                        </span>
+                      </div>  
+                    } 
+
 
                       <Divider section />
                       <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 

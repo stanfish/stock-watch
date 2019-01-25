@@ -40,3 +40,17 @@ export const fetchCurrentPrice = sym => async dispatch => {
   }
   dispatch({ type: 'FETCH_CURRENT_PRICE', payload: {stock: sym, price: responsePrice} });
 };
+
+
+export const fetchDatePrice = (sym, date, isFrom) => async dispatch => {
+  let responsePrice = 'N/A';
+  try {
+    const response = await axios.create({
+      baseURL: 'https://api.iextrading.com/1.0/stock/'
+    }).get(sym+'/chart/date/'+date);
+    responsePrice = response.data[response.data.length-1].average;
+  } catch(err) {
+    //error in fetching
+  }
+  dispatch({ type: 'FETCH_DATE_PRICE', payload: {stock: sym, price: responsePrice, isFrom: isFrom} });
+};
