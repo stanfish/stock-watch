@@ -25,8 +25,6 @@ const dateRangeReducer = (state=null, action) => {
   return state;
 }
 
-
-
 const stockMapReducer = (stocks={}, action) => {
   if (action.type === 'FETCH_CURRENT_PRICE') {
     if (!stocks[action.payload.stock] || !stocks[action.payload.stock].currentPrice) {
@@ -35,6 +33,18 @@ const stockMapReducer = (stocks={}, action) => {
       newStocks[action.payload.stock].currentPrice = action.payload.price;
       return newStocks;
     }
+  } else if (action.type === 'FETCH_DATE_PRICE') {
+    let newStocks = {...stocks};
+    let priceKey = action.payload.isFrom ? "fromPrice" : "toPrice";
+    newStocks[action.payload.stock][priceKey] = action.payload.price;
+
+    if (newStocks[action.payload.stock].fromPrice && newStocks[action.payload.stock].toPrice) {
+      let percentChange = (newStocks[action.payload.stock].toPrice - newStocks[action.payload.stock].fromPrice) / newStocks[action.payload.stock].fromPrice * 100;
+      percentChange = Math.round(percentChange * 1000) / 1000;
+      newStocks[action.payload.stock].percent = percentChange;
+    }
+
+    return newStocks;    
   }
   return stocks;
 }
