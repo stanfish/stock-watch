@@ -36,9 +36,10 @@ const stockMapReducer = (stocks={}, action) => {
   } else if (action.type === 'FETCH_DATE_PRICE') {
     let newStocks = {...stocks};
     let priceKey = action.payload.isFrom ? "fromPrice" : "toPrice";
+    newStocks[action.payload.stock] = newStocks[action.payload.stock] || {};
     newStocks[action.payload.stock][priceKey] = action.payload.price;
 
-    if (newStocks[action.payload.stock].fromPrice && newStocks[action.payload.stock].toPrice) {
+    if (newStocks[action.payload.stock] && newStocks[action.payload.stock].fromPrice && newStocks[action.payload.stock].toPrice) {
       let percentChange = (newStocks[action.payload.stock].toPrice - newStocks[action.payload.stock].fromPrice) / newStocks[action.payload.stock].fromPrice * 100;
       percentChange = Math.round(percentChange * 1000) / 1000;
       newStocks[action.payload.stock].percent = percentChange;

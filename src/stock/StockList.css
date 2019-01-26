@@ -4,7 +4,7 @@
 }
 
 .stock-display-item {
-  width: 65%;
+  width: 95%;
   margin-left: 50px;
 }
 
@@ -24,4 +24,8 @@
 
 .stock-display-percent {
   color:black;
+}
+
+.ReactTable{
+  width: 100%;
 }
