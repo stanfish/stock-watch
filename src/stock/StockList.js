@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Divider, Loader } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import {get} from 'lodash';
+import ReactTable from "react-table";
+import 'react-table/react-table.css'
 import firebase from '../firebase.js';
 import './StockList.css';
 
@@ -23,68 +26,65 @@ class StockList extends Component {
       toDate = moment(this.props.dateRange.toDate).format('MM/DD/YYYY');
     }    
 
+    let data = [];
+    this.props.stocks.forEach((item) => {
+      data.push({
+        id: item.id,
+        stock: item.stock,
+        price: get(this.props, 'stockMap['+item.stock+'].currentPrice', ''),
+        fromPrice: get(this.props, 'stockMap['+item.stock+'].fromPrice', ''),
+        toPrice: get(this.props, 'stockMap['+item.stock+'].toPrice', ''),
+        percent: get(this.props, 'stockMap['+item.stock+'].percent', ''),
+      });
+    });
+  
+    const columns = [{
+      Header: 'Stock',
+      accessor: 'stock' // String-based value accessors!
+    }, {
+      Header: 'Price',
+      accessor: 'price',
+    }, {
+      Header: 'Price From '+fromDate,
+      accessor: 'fromPrice'
+    }, {
+      Header: 'Price To '+toDate,
+      accessor: 'toPrice'      
+    }, {
+      Header: 'Percent Change',
+      accessor: 'percent',
+      Cell: row => {
+        let percentClass = 'stock-display-percent';
+        if (this.props.stockMap[row.original.stock] && this.props.stockMap[row.original.stock].percent !== undefined) {
+          if (this.props.stockMap[row.original.stock].percent >= 0) {
+            percentClass = 'stock-display-percent-up';
+          } else {
+            percentClass = 'stock-display-percent-down';
+          }
+        }
+        return (<span className={percentClass}> 
+          {get(this.props, 'stockMap['+row.original.stock+'].percent', '') + '%'}
+        </span>);
+      }
+    }, {
+      Header: 'Action',
+      Cell: row => (
+        <Button secondary onClick={() => this.removeItem(row.original.id)}>Remove</Button> 
+      )
+    }];
+  
+
     return (
       <section className='stock-display-item'>
         <div className="stock-wrapper">
           <ul>
-            {this.props.stocks && this.props.stocks.map((item) => {
-
-            let percentClass = 'stock-display-percent';
-            if (this.props.stockMap[item.stock] && this.props.stockMap[item.stock].percent !== undefined) {
-              if (this.props.stockMap[item.stock].percent >= 0) {
-                percentClass = 'stock-display-percent-up';
-              } else {
-                percentClass = 'stock-display-percent-down';
-              }
-            }
-
-              return (
-                <li key={item.id}>
-                  <h3>{item.stock}</h3>
-                    <div>
-                      Current price: $
-                      <span>
-                        <Loader inline active={!this.props.stockMap[item.stock] || !this.props.stockMap[item.stock].currentPrice} />
-                        {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].currentPrice}
-                      </span>
-                    </div>  
-
-                    { fromDate &&
-                      <div>
-                        Price at ({fromDate}): $ 
-                        <span>
-                          <Loader inline active={!this.props.stockMap[item.stock] || !this.props.stockMap[item.stock].fromPrice} />
-                          {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].fromPrice}
-                        </span>
-                      </div>  
-                    }
-
-                    { toDate &&
-                      <div>
-                        Price at ({toDate}): $ 
-                        <span>
-                          <Loader inline active={!this.props.stockMap[item.stock] || !this.props.stockMap[item.stock].toPrice} />
-                          {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].toPrice}
-                        </span>
-                      </div>  
-                    } 
-
-                    { fromDate && toDate &&
-                      <div>
-                        Percent change:   
-                        <span className={percentClass}>
-                          <Loader inline active={!this.props.stockMap[item.stock] || this.props.stockMap[item.stock].percent === undefined} />
-                          {this.props.stockMap[item.stock] && this.props.stockMap[item.stock].percent} %
-                        </span>
-                      </div>  
-                    } 
-
-                    <Divider section />
-                    <Button secondary onClick={() => this.removeItem(item.id)}>Remove</Button> 
-                </li>
-              )
-            })}
+            <ReactTable
+              data={data}
+              columns={columns}
+              className="-striped -highlight"
+            />
           </ul>
+       
         </div>
       </section>
     );

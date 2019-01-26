@@ -33,11 +33,10 @@ class StockPage extends Component {
     console.log('Apply date', moment(from).format('YYYYMMDD'), moment(to).format('YYYYMMDD'));
     this.props.setDateRange(from, to);
 
-    // console.log('stockMap',this.props.stockMap);
-    for (var stock in this.props.stockMap) {
-      this.props.fetchDatePrice(stock, moment(from).format('YYYYMMDD'), true);
-      this.props.fetchDatePrice(stock, moment(to).format('YYYYMMDD'), false);
-    }
+    this.props.stocks.forEach(stock => {
+      this.props.fetchDatePrice(stock.stock, moment(from).format('YYYYMMDD'), true);
+      this.props.fetchDatePrice(stock.stock, moment(to).format('YYYYMMDD'), false);
+    });
   }
   
   render() {
@@ -56,7 +55,7 @@ class StockPage extends Component {
 const mapStateToProps = state => {
   return { 
     user: state.user,
-    stockMap: state.stockMap,
+    stocks: state.stocks,
   };
 };
 

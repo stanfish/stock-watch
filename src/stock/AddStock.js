@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import firebase from '../firebase.js';
 import './AddStock.css';
-import { setStocks } from '../actions';
+import { setStocks, fetchDatePrice } from '../actions';
 
 
 class AddStock extends Component {
@@ -33,6 +34,11 @@ class AddStock extends Component {
     this.setState({
       inputStock: ''
     });
+
+    if (this.props.dateRange && this.props.dateRange.fromDate  && this.props.dateRange.toDate) {
+      this.props.fetchDatePrice(this.state.inputStock, moment(this.props.dateRange.fromDate).format('YYYYMMDD'), true);
+      this.props.fetchDatePrice(this.state.inputStock, moment(this.props.dateRange.toDate).format('YYYYMMDD'), false);
+    }
   }
 
   
@@ -53,12 +59,14 @@ class AddStock extends Component {
 const mapStateToProps = state => {
   return { 
     user: state.user,
+    dateRange: state.dateRange,
   };
 };
 
 
 const mapDispatchToProps = {
-  setStocks
+  setStocks,
+  fetchDatePrice,
 };
 
 export default connect(
