@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase from '../firebase.js';
 import moment from 'moment';
 import './StockPage.css';
-import { setStocks, fetchCurrentPrice, setDateRange, fetchDatePrice } from '../actions';
+import { setStocks, fetchCurrentPrice, fetchCompany, setDateRange, fetchDatePrice } from '../actions';
 import AddStock from './AddStock';
 import StockList from './StockList';
 import DateRangePicker from './DateRangePicker';
@@ -23,6 +23,7 @@ class StockPage extends Component {
           user: items[item].user
         });
         this.props.fetchCurrentPrice(items[item].stock);
+        this.props.fetchCompany(items[item].stock);
       }
       this.props.setStocks(newItem);
       
@@ -62,6 +63,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   setStocks,
   fetchCurrentPrice,
+  fetchCompany,
   setDateRange,
   fetchDatePrice,
 };

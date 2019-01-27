@@ -8,6 +8,7 @@ import 'react-table/react-table.css'
 import firebase from '../firebase.js';
 import './StockList.css';
 
+const maxPageSize = 20;
 class StockList extends Component {
 
   removeItem = itemId => {
@@ -31,24 +32,30 @@ class StockList extends Component {
       data.push({
         id: item.id,
         stock: item.stock,
+        company: get(this.props, 'stockMap['+item.stock+'].company', ''),
         price: get(this.props, 'stockMap['+item.stock+'].currentPrice', ''),
         fromPrice: get(this.props, 'stockMap['+item.stock+'].fromPrice', ''),
         toPrice: get(this.props, 'stockMap['+item.stock+'].toPrice', ''),
         percent: get(this.props, 'stockMap['+item.stock+'].percent', ''),
       });
     });
+
+    const pageSize = Math.min(maxPageSize, this.props.stocks.length);
   
     const columns = [{
       Header: 'Stock',
-      accessor: 'stock' // String-based value accessors!
+      accessor: 'stock' 
     }, {
+      Header: 'Company',
+      accessor: 'company' 
+    }, {      
       Header: 'Price',
       accessor: 'price',
     }, {
-      Header: 'Price From '+fromDate,
+      Header: 'Price From ' + fromDate,
       accessor: 'fromPrice'
     }, {
-      Header: 'Price To '+toDate,
+      Header: 'Price To ' + toDate,
       accessor: 'toPrice'      
     }, {
       Header: 'Percent Change',
@@ -81,6 +88,7 @@ class StockList extends Component {
             <ReactTable
               data={data}
               columns={columns}
+              pageSize={pageSize}
               className="-striped -highlight"
             />
           </ul>
