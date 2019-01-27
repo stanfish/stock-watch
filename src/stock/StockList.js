@@ -87,16 +87,14 @@ class StockList extends Component {
     }];
 
     return (
-        <div className="stock-wrapper">
-          <ul>
-            <ReactTable
-              data={data}
-              columns={columns}
-              pageSize={pageSize}
-              className="-striped -highlight"
-            />
-          </ul>
-        </div>
+      <ul>
+        <ReactTable
+          data={data}
+          columns={columns}
+          pageSize={pageSize}
+          className="-striped -highlight"
+        />
+      </ul>
     );
   }
 }
