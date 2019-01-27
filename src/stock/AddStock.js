@@ -6,9 +6,7 @@ import firebase from '../firebase.js';
 import './AddStock.css';
 import { setStocks, fetchDatePrice } from '../actions';
 
-
 class AddStock extends Component {
-
   state = {
     inputStock: ''
   }
@@ -35,12 +33,12 @@ class AddStock extends Component {
       inputStock: ''
     });
 
-    if (this.props.dateRange && this.props.dateRange.fromDate  && this.props.dateRange.toDate) {
-      this.props.fetchDatePrice(this.state.inputStock, moment(this.props.dateRange.fromDate).format('YYYYMMDD'), true);
-      this.props.fetchDatePrice(this.state.inputStock, moment(this.props.dateRange.toDate).format('YYYYMMDD'), false);
+    const {fromDate, toDate} = this.props.dateRange || {};
+    if (fromDate && toDate) {
+      this.props.fetchDatePrice(this.state.inputStock, moment(fromDate).format('YYYYMMDD'), true);
+      this.props.fetchDatePrice(this.state.inputStock, moment(toDate).format('YYYYMMDD'), false);
     }
   }
-
   
   render() {
     return (

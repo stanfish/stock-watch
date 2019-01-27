@@ -4,6 +4,7 @@ import StockPage from './stock/StockPage.js';
 import Login from './login/Login.js';
 import { connect } from 'react-redux';
 import { setUser } from './actions';
+
 class App extends Component {
   
   handleUserChange = (user) => {
@@ -29,7 +30,6 @@ class App extends Component {
             <p>You must be logged in to see the stock list.</p>
           </div>
         } 
-         
       </div>
     );
   }
