@@ -18,7 +18,7 @@ class StockList extends Component {
   
   render() {
 
-    let fromDate, toDate;
+    let fromDate='', toDate='';
     if (this.props.dateRange && this.props.dateRange.fromDate) {
       fromDate = moment(this.props.dateRange.fromDate).format('MM/DD/YYYY');
     }
@@ -44,7 +44,8 @@ class StockList extends Component {
   
     const columns = [{
       Header: 'Stock',
-      accessor: 'stock' 
+      accessor: 'stock',
+      width: 50 
     }, {
       Header: 'Company',
       accessor: 'company' 
@@ -62,15 +63,16 @@ class StockList extends Component {
       accessor: 'percent',
       Cell: row => {
         let percentClass = 'stock-display-percent';
-        if (this.props.stockMap[row.original.stock] && this.props.stockMap[row.original.stock].percent !== undefined) {
-          if (this.props.stockMap[row.original.stock].percent >= 0) {
+        const stock = row.original.stock;
+        if (this.props.stockMap[stock] && this.props.stockMap[stock].percent !== undefined) {
+          if (this.props.stockMap[stock].percent >= 0) {
             percentClass = 'stock-display-percent-up';
           } else {
             percentClass = 'stock-display-percent-down';
           }
         }
         return (<span className={percentClass}> 
-          {get(this.props, 'stockMap['+row.original.stock+'].percent', '') + '%'}
+          {get(this.props, 'stockMap['+stock+'].percent', '') + '%'}
         </span>);
       }
     }, {
