@@ -8,12 +8,6 @@
   margin-left: 50px;
 }
 
-.stock-display-item button {
-  margin-top: 20px;
-  margin-left: auto;
-  display: block;
-}
-
 .stock-display-percent-up {
   color: green;
 }
