@@ -8,6 +8,7 @@ import AddStock from './AddStock';
 import StockList from './StockList';
 import DateRangePicker from './DateRangePicker';
 //import {saveLocalStorage, getLocalStorage} from '../util';
+
 class StockPage extends Component {
 
   componentDidMount() {
@@ -26,14 +27,12 @@ class StockPage extends Component {
         this.props.fetchCompany(items[item].stock);
       }
       this.props.setStocks(newItem);
-      
     });
   }
 
   applyDateRange = (from, to ) => {
-    console.log('Apply date', moment(from).format('YYYYMMDD'), moment(to).format('YYYYMMDD'));
+    //console.log('Apply date', moment(from).format('YYYYMMDD'), moment(to).format('YYYYMMDD'));
     this.props.setDateRange(from, to);
-
     this.props.stocks.forEach(stock => {
       this.props.fetchDatePrice(stock.stock, moment(from).format('YYYYMMDD'), true);
       this.props.fetchDatePrice(stock.stock, moment(to).format('YYYYMMDD'), false);
@@ -46,6 +45,7 @@ class StockPage extends Component {
           <AddStock />
           <div style={{width: '100%'}}>
             <DateRangePicker onApply={this.applyDateRange} />
+            <br />
             <StockList />
           </div>
         </div>

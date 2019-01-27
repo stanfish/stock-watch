@@ -7,31 +7,37 @@ export default class DateRangePicker extends React.Component {
   static defaultProps = {
     numberOfMonths: 2,
   };
+
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
     this.state = this.getInitialState();
   }
+
   getInitialState() {
     return {
       from: undefined,
       to: undefined,
     };
   }
+
   handleApplyClick = _ => {
     this.props.onApply(this.state.from, this.state.to);
     this.setState({open: false});
   }
+
   handleDayClick(day, {disabled}) {
     if (!disabled) {
       const range = DateUtils.addDayToRange(day, this.state);
       this.setState(range);
     }
   }
+
   handleResetClick() {
     this.setState(this.getInitialState());
   }
+
   openArea = _ => {
     this.setState({open: true});
   }
@@ -72,13 +78,13 @@ export default class DateRangePicker extends React.Component {
       <p>
         {from &&
           to &&
-          `Selected from ${from.toLocaleDateString()} to
-              ${to.toLocaleDateString()}`
+          `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()}`
         }
         { (!from || !to) && "No date range is selected."}
-        {' '}        
+        <br />
+        <br />
         <Button secondary onClick={this.openArea}>
-          Open
+          Custom
         </Button>    
         <Button secondary onClick={this.setLastDay}>
           Last Day
@@ -89,7 +95,6 @@ export default class DateRangePicker extends React.Component {
         <Button secondary onClick={this.setLastWeek}>
           Last Week
         </Button>                    
-
       </p>
     );
 

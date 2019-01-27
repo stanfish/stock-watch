@@ -16,7 +16,7 @@ Rename src/firebase.dev.js to src/firebase.js and add config
 - [x] Styling structure
 - [x] Semantic UI
 - [x] Redux
-- [ ] Stock API (https://iextrading.com/developer/docs/#chart)
+- [x] Stock API (https://iextrading.com/developer/docs/#chart)
 - [x] React table
 - [ ] Router
 - [ ] Loader

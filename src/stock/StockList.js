@@ -17,7 +17,6 @@ class StockList extends Component {
   }
   
   render() {
-
     let fromDate='', toDate='';
     if (this.props.dateRange && this.props.dateRange.fromDate) {
       fromDate = moment(this.props.dateRange.fromDate).format('MM/DD/YYYY');
@@ -52,6 +51,7 @@ class StockList extends Component {
     }, {      
       Header: 'Price',
       accessor: 'price',
+      width: 75,
     }, {
       Header: 'Price From ' + fromDate,
       accessor: 'fromPrice'
@@ -59,8 +59,9 @@ class StockList extends Component {
       Header: 'Price To ' + toDate,
       accessor: 'toPrice'      
     }, {
-      Header: 'Percent Change',
+      Header: 'Change',
       accessor: 'percent',
+      width: 80,
       Cell: row => {
         let percentClass = 'stock-display-percent';
         const stock = row.original.stock;
@@ -71,20 +72,21 @@ class StockList extends Component {
             percentClass = 'stock-display-percent-down';
           }
         }
-        return (<span className={percentClass}> 
-          {get(this.props, 'stockMap['+stock+'].percent', '') + '%'}
-        </span>);
+        return (
+          <span className={percentClass}> 
+            {get(this.props, 'stockMap['+stock+'].percent', '') + '%'}
+          </span>
+        );
       }
     }, {
       Header: 'Action',
       Cell: row => (
-        <Button secondary onClick={() => this.removeItem(row.original.id)}>Remove</Button> 
-      )
+        <Button negative onClick={() => this.removeItem(row.original.id)}>Remove</Button> 
+      ),
+      width: 100,
     }];
-  
 
     return (
-      <section className='stock-display-item'>
         <div className="stock-wrapper">
           <ul>
             <ReactTable
@@ -94,9 +96,7 @@ class StockList extends Component {
               className="-striped -highlight"
             />
           </ul>
-       
         </div>
-      </section>
     );
   }
 }
