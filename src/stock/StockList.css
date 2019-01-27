@@ -23,3 +23,7 @@
 .ReactTable{
   width: 100%;
 }
+
+div.rt-resizable-header:focus{
+  outline-width: 0;
+}

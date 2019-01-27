@@ -41,6 +41,29 @@ export default class DateRangePicker extends React.Component {
     return day.getDay() === 0 || day.getDay() === 6 || day > today;
   }
 
+  setLastXDays = x => {
+    let lastXDays = new Date();
+    lastXDays.setDate(lastXDays.getDate() - x);
+    let today = new Date();
+    this.setState({
+      from: lastXDays,
+      to: today
+    });
+    this.props.onApply(lastXDays, today);
+  }
+
+  setLastDay = _ => {
+    this.setLastXDays(1);
+  }
+
+  setLast3Day = _ => {
+    this.setLastXDays(3);
+  }
+
+  setLastWeek = _ => {
+    this.setLastXDays(7);
+  }
+
   render() {
     const { from, to, open } = this.state;
     const modifiers = { start: from, end: to };
@@ -57,6 +80,16 @@ export default class DateRangePicker extends React.Component {
         <Button secondary onClick={this.openArea}>
           Open
         </Button>    
+        <Button secondary onClick={this.setLastDay}>
+          Last Day
+        </Button>   
+        <Button secondary onClick={this.setLast3Day}>
+          Last 3 Day
+        </Button>        
+        <Button secondary onClick={this.setLastWeek}>
+          Last Week
+        </Button>                    
+
       </p>
     );
 
