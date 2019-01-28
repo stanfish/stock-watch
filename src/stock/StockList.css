@@ -15,8 +15,16 @@
   color:black;
 }
 
+.mini-button {
+  height: 10px;
+}
+
 .ReactTable{
   width: 100%;
+}
+
+.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+  background: rgba(0,0,0,0.2);
 }
 
 div.rt-resizable-header:focus{

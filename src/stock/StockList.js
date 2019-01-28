@@ -81,7 +81,7 @@ class StockList extends Component {
     }, {
       Header: 'Action',
       Cell: row => (
-        <Button negative onClick={() => this.removeItem(row.original.id)}>Remove</Button> 
+        <Button size='mini' compact negative onClick={() => this.removeItem(row.original.id)}>Remove</Button> 
       ),
       width: 100,
     }];
@@ -93,6 +93,13 @@ class StockList extends Component {
           columns={columns}
           pageSize={pageSize}
           className="-striped -highlight"
+          getTrProps={ _ => {
+            return {
+              style: {
+                height: '35px'
+              }
+            };
+          }}
         />
       </ul>
     );
