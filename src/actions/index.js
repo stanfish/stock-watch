@@ -1,3 +1,4 @@
+import moment from 'moment';
 import axios from 'axios';
 
 export const setUser = (user) => ({
@@ -50,6 +51,13 @@ export const fetchCompany = sym => async (dispatch) => {
 
 
 export const fetchDatePrice = (sym, date, isFrom) => async (dispatch) => {
+  const today = moment(new Date()).format('MM/DD/YYYY');
+  const fetchDate = moment(date).format('MM/DD/YYYY');
+  if (today === fetchDate) {
+    dispatch({ type: 'FETCH_DATE_PRICE', payload: { stock: sym, isFrom } });
+    return;
+  }
+
   let responsePrice = 'N/A';
   try {
     const response = await axios.create({

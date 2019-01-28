@@ -45,7 +45,7 @@ const stockMapReducer = (stocks={}, action) => {
     let newStocks = {...stocks};
     let priceKey = isFrom ? "fromPrice" : "toPrice";
     newStocks[stock] = newStocks[stock] || {};
-    newStocks[stock][priceKey] = price;
+    newStocks[stock][priceKey] = price || newStocks[stock].currentPrice;
 
     if (newStocks[stock] && newStocks[stock].fromPrice && newStocks[stock].toPrice) {
       let percentChange = (newStocks[stock].toPrice - newStocks[stock].fromPrice) / newStocks[stock].fromPrice * 100;
