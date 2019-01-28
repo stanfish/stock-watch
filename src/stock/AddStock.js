@@ -52,7 +52,7 @@ class AddStock extends Component {
       <section className='stock-add-item'>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="inputStock">New Stock : </label>
-          <Input type="text" id="inputStock" name="inputStock" placeholder="Stock Symbol" onChange={this.handleChange} value={this.state.inputStock} />
+          <Input style={{width: '115px'}} type="text" id="inputStock" name="inputStock" placeholder="Stock Symbol" onChange={this.handleChange} value={this.state.inputStock} />
           <span className="stock-error-message">{this.state.error}</span>
           <br />
           <Button primary>Add Stock</Button>

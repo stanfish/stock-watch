@@ -1,6 +1,8 @@
 
 .stock-container {
-  display: flex;
+  display: grid;
+  grid-template-areas: 'add-stock stock-list';
+  grid-template-columns: 170px auto;
   max-width: 1500px;
   margin: 0 auto;
   padding-top: 30px;

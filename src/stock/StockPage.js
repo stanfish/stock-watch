@@ -43,7 +43,7 @@ class StockPage extends Component {
     return (
         <div className='stock-container'>
           <AddStock />
-          <div style={{width: '100%'}}>
+          <div style={{width: '100%', gridArea: 'stock-list'}}>
             <DateRangePicker onApply={this.applyDateRange} />
             <br />
             <StockList />
