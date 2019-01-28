@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Login.css';
+import './Login.scss';
 import { auth, googleProvider, facebookProvider } from '../firebase.js';
 import { Input, Button, Icon } from 'semantic-ui-react';
 

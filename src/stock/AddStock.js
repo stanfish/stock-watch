@@ -3,7 +3,7 @@ import { Input, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import firebase from '../firebase.js';
-import './AddStock.css';
+import './AddStock.scss';
 import { setStocks, fetchDatePrice } from '../actions';
 
 class AddStock extends Component {

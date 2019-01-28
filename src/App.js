@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import StockPage from './stock/StockPage.js';
 import Login from './login/Login.js';
 import { connect } from 'react-redux';

@@ -1,3 +1,5 @@
+$stock-error-color: red;
+
 .stock-add-item {
   border-radius: 2px;
   border-top: 3px solid #103D5D;
@@ -15,5 +17,5 @@
 }
 
 .stock-error-message {
-  color: red;
+  color: $stock-error-color;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import { Button } from 'semantic-ui-react';
 import 'react-day-picker/lib/style.css';
-import './DateRangePicker.css';
+import './DateRangePicker.scss';
 export default class DateRangePicker extends React.Component {
   static defaultProps = {
     numberOfMonths: 2,

@@ -1,7 +1,9 @@
+$login-width: 200px;
+
 .login-login-section {
   display: table-cell;
 }
 
 .login-email-login {
-  width: 200px;
+  width: $login-width;
 }

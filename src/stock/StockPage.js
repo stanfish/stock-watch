@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from '../firebase.js';
 import moment from 'moment';
-import './StockPage.css';
+import './StockPage.scss';
 import { setStocks, fetchCurrentPrice, fetchCompany, setDateRange, fetchDatePrice } from '../actions';
 import AddStock from './AddStock';
 import StockList from './StockList';

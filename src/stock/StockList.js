@@ -6,7 +6,7 @@ import {get} from 'lodash';
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
 import firebase from '../firebase.js';
-import './StockList.css';
+import './StockList.scss';
 
 const maxPageSize = 20;
 class StockList extends Component {
