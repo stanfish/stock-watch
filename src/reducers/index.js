@@ -46,18 +46,19 @@ const stockMapReducer = (stocks={}, action) => {
     let priceKey = isFrom ? "fromPrice" : "toPrice";
     newStocks[stock] = newStocks[stock] || {};
     newStocks[stock][priceKey] = price || newStocks[stock].currentPrice;
+    const {fromPrice, toPrice} = newStocks[stock];
 
-    if (newStocks[stock] && newStocks[stock].fromPrice && newStocks[stock].toPrice) {
-      let percentChange = (newStocks[stock].toPrice - newStocks[stock].fromPrice) / newStocks[stock].fromPrice * 100;
+    if (fromPrice && toPrice) {
+      let percentChange = (toPrice - fromPrice) / fromPrice * 100;
       percentChange = Math.round(percentChange * 1000) / 1000;
       newStocks[stock].percent = percentChange;
+    } else {
+      newStocks[stock].percent = "-";
     }
-
     return newStocks;    
   }
   return stocks;
 }
-
 
 export default combineReducers({
   user: userReducer,
