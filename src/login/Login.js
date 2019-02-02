@@ -14,7 +14,7 @@ class Login extends Component {
   
   setUser(user) {
     this.setState({user});
-    this.props.onUserChange(user);
+    this.props.onUserChange && this.props.onUserChange(user);
   }
 
   logout = _ => {
@@ -72,7 +72,7 @@ class Login extends Component {
   render() {
     return (
       this.state.user ?
-      <Button className="login-login-section" onClick={this.logout}>Log Out</Button>                
+        <Button secondary onClick={this.logout}>Log out</Button>                
       :
       <span className="login-login-section" style={{width:"250px"}}>
         <form className="login-email-login" onSubmit={this.handleSubmit}>
