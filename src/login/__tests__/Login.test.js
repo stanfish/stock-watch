@@ -31,6 +31,7 @@ it('has those 4 buttons before login', () => {
 it('has log out buttons after login', () => {
   const instance = wrapper.instance();
   instance.setUser({user: 'mock_user'});
+  wrapper.update();
   expect(wrapper.find({secondary: true}).length).toEqual(1);
   expect(wrapper.find({secondary: true}).html()).toContain('Log out');
 });
@@ -38,9 +39,11 @@ it('has log out buttons after login', () => {
 it('has those 4 buttons after login and logout', () => {
   const instance = wrapper.instance();
   instance.setUser({user: 'mock_user'});
+  wrapper.update();
   expect(wrapper.find({secondary: true}).length).toEqual(1);
   expect(wrapper.find({secondary: true}).html()).toContain('Log out');
   instance.setUser(null);
+  wrapper.update();
   expect(wrapper.find({primary: true}).length).toEqual(1);
   expect(wrapper.find({primary: true}).html()).toContain('Log in');
   expect(wrapper.find({secondary: true}).length).toEqual(1);

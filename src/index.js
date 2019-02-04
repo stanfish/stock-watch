@@ -2,15 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.scss';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose  } from 'redux';
-import reducers from './reducers';
-import thunk from 'redux-thunk';
+import Root from 'Root';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 ReactDOM.render(
-  <Provider store={createStore(reducers, composeEnhancers(applyMiddleware(thunk)))}>
+  <Root>
     <App />
-  </Provider>,
+  </Root>,
   document.getElementById('root')
 );
