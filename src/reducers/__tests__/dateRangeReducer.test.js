@@ -1,5 +1,6 @@
 import dateRangeReducer from 'reducers/dateRangeReducer';
-
+const fromDate = '01-01-2011';
+const toDate = '01-01-2012';
 it ('handles SET_DATE_RANGE action', () => {
   const fromDate = '01-01-2011';
   const toDate = '01-01-2012';
@@ -18,7 +19,10 @@ it ('handles SET_DATE_RANGE action', () => {
 it ('handles unknown action', () => {
   const action = {
     type: 'UNKNOWN',
-    payload: {}
+    payload: {
+      fromDate,
+      toDate,
+    }
   };
   const newState = dateRangeReducer([], action);
   expect (newState).toEqual([]);
