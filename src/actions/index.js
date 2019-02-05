@@ -1,5 +1,6 @@
 import moment from 'moment';
 import axios from 'axios';
+const APIBaseURL = 'https://api.iextrading.com/1.0/stock';
 
 export const setUser = (user) => ({
     type: 'SET_USER',
@@ -27,7 +28,7 @@ export const fetchCurrentPrice = sym => async (dispatch) => {
   let responsePrice = 'N/A';
   try {
     const response = await axios.create({
-      baseURL: 'https://api.iextrading.com/1.0/stock',
+      baseURL: APIBaseURL,
     }).get(`${sym}/price`);
     responsePrice = response.data;
   } catch (err) {
@@ -40,7 +41,7 @@ export const fetchCompany = sym => async (dispatch) => {
   let responseCompany = '';
   try {
     const response = await axios.create({
-      baseURL: 'https://api.iextrading.com/1.0/stock',
+      baseURL: APIBaseURL,
     }).get(`${sym}/company`);
     responseCompany = response.data.companyName;
   } catch (err) {
@@ -61,7 +62,7 @@ export const fetchDatePrice = (sym, date, isFrom) => async (dispatch) => {
   let responsePrice = 'N/A';
   try {
     const response = await axios.create({
-      baseURL: 'https://api.iextrading.com/1.0/stock/',
+      baseURL: APIBaseURL,
     }).get(`${sym}/chart/date/${date}`);
     responsePrice = response.data[response.data.length - 1].average;
   } catch (err) {
