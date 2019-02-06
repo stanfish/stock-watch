@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Login.scss';
-import { auth, googleProvider, facebookProvider } from '../firebase.js';
+import { auth, googleProvider, facebookProvider } from 'firebase.js';
 import { Input, Button, Icon } from 'semantic-ui-react';
 
 class Login extends Component {
@@ -30,6 +30,10 @@ class Login extends Component {
       auth.signInWithPopup(loginProvider) 
         .then((result) => {
           this.setUser(result.user);
+        })
+        .catch(error => {
+          var errorMessage = error.message;
+          this.setState({errorMessage});    
         });
     }
   }
@@ -42,23 +46,25 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(error => {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      this.setState({errorMessage});
-      console.log(errorCode, " Login error ", errorMessage);
-    });
+    auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+      .catch(error => {
+        // Handle Errors here.
+        //var errorCode = error.code;
+        var errorMessage = error.message;
+        this.setState({errorMessage});
+        //console.log(errorCode, " Login error ", errorMessage);
+      });
   }
 
   signUp = _ => {
-    auth.createUserWithEmailAndPassword(this.state.email, this.state.password).catch(error => {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      this.setState({errorMessage});
-      console.log(errorCode, " Sign up error ", errorMessage);
-    });
+    auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .catch(error => {
+        // Handle Errors here.
+        //var errorCode = error.code;
+        var errorMessage = error.message;
+        this.setState({errorMessage});
+        //console.log(errorCode, " Sign up error ", errorMessage);
+      });
   }
 
   componentDidMount() {

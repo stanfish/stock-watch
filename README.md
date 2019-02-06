@@ -19,9 +19,9 @@ Rename src/firebase.dev.js to src/firebase.js and add config
 - [x] Stock API (https://iextrading.com/developer/docs/#chart)
 - [x] React table
 - [x] grid-template-areas
-- [ ] Router
 - [X] Loader
 - [X] SASS
-- [ ] Refactor
-- [ ] GraphQL
+- [X] Refactor
 - [ ] Unit test
+- [ ] Router
+- [ ] GraphQL
