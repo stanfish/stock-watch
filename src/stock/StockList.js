@@ -12,8 +12,18 @@ const maxPageSize = 20;
 class StockList extends Component {
 
   removeItem = itemId => {
-    const itemRef = firebase.database().ref(`/items/${itemId}`);
-    itemRef.remove();
+
+// For Realtime Firebase Database
+    // const itemRef = firebase.database().ref(`/items/${itemId}`);
+    // itemRef.remove();
+
+// For Cloud Firebase
+    firebase.firestore().collection("stocks").doc(itemId).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+
   }
   
   render() {

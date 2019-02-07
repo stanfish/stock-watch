@@ -12,22 +12,45 @@ import DateRangePicker from './DateRangePicker';
 class StockPage extends Component {
 
   componentDidMount() {
-    const itemsRef = firebase.database().ref('items');
+    // For Realtime Firebase Database
+    // const itemsRef = firebase.database().ref('items');
+    // itemsRef.orderByChild('user').equalTo(this.props.user.uid).on('value', (snapshot) => {
+    //   let items = snapshot.val();
+    //   let newItem = [];
+    //   for (let item in items) {
+    //     newItem.push({
+    //       id: item,
+    //       stock: items[item].stock,
+    //       user: items[item].user
+    //     });
+    //     this.props.fetchCurrentPrice(items[item].stock);
+    //     this.props.fetchCompany(items[item].stock);
+    //   }
+    //   this.props.setStocks(newItem);
+    // });
 
-    itemsRef.orderByChild('user').equalTo(this.props.user.uid).on('value', (snapshot) => {
-      let items = snapshot.val();
+    // For Cloud Firebase
+    this.unSubscribeFirebaseOnSnapshot = firebase.firestore().collection('stocks').where('user','==',this.props.user.uid).onSnapshot(snapshot => {
       let newItem = [];
-      for (let item in items) {
-        newItem.push({
-          id: item,
-          stock: items[item].stock,
-          user: items[item].user
-        });
-        this.props.fetchCurrentPrice(items[item].stock);
-        this.props.fetchCompany(items[item].stock);
+      for (var i=0; i<snapshot.docs.length; i++) {
+        let doc = snapshot.docs[i];
+        if (doc.data) {
+          let data = doc.data();
+          newItem.push({
+            id: doc.id,
+            stock: data.stock,
+            user: data.user
+          });
+          this.props.fetchCurrentPrice(data.stock);
+          this.props.fetchCompany(data.stock);
+        }
       }
       this.props.setStocks(newItem);
     });
+  }
+
+  componentWillUnmount() {
+    this.unSubscribeFirebaseOnSnapshot();
   }
 
   applyDateRange = (from, to ) => {

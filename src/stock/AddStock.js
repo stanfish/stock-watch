@@ -30,12 +30,21 @@ class AddStock extends Component {
       return;
     }
 
-    const itemsRef = firebase.database().ref('items');
     const item = {
       stock: this.state.inputStock,
       user: this.props.user.uid
     }
-    itemsRef.push(item);
+
+// For Realtime Firebase Database
+    // const itemsRef = firebase.database().ref('items');
+    // itemsRef.push(item);
+
+    
+  // For Cloud Firebase
+    firebase.firestore().collection("stocks").add(
+      item
+    );
+
     this.setState({
       inputStock: ''
     });
