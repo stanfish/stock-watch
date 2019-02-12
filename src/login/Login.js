@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Login.scss';
-import { auth, googleProvider, facebookProvider } from 'firebase.js';
+import { auth, googleProvider, facebookProvider } from '../firebase.js';
 import { Input, Button, Icon } from 'semantic-ui-react';
 
 class Login extends Component {

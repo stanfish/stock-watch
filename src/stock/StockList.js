@@ -56,19 +56,6 @@ class StockList extends Component {
       accessor: 'stock',
       width: 50 
     }, {
-      Header: 'Company',
-      accessor: 'company' 
-    }, {      
-      Header: 'Price',
-      accessor: 'price',
-      width: 75,
-    }, {
-      Header: 'Price From ' + fromDate,
-      accessor: 'fromPrice'
-    }, {
-      Header: 'Price To ' + toDate,
-      accessor: 'toPrice'      
-    }, {
       Header: 'Change',
       accessor: 'percent',
       width: 80,
@@ -88,6 +75,19 @@ class StockList extends Component {
           </span>
         );
       }
+    }, {
+      Header: 'Company',
+      accessor: 'company' 
+    }, {      
+      Header: 'Price',
+      accessor: 'price',
+      width: 75,
+    }, {
+      Header: 'Price From ' + fromDate,
+      accessor: 'fromPrice'
+    }, {
+      Header: 'Price To ' + toDate,
+      accessor: 'toPrice'      
     }, {
       Header: 'Action',
       Cell: row => (
